@@ -2,7 +2,8 @@ import { StyleSheet, SafeAreaView, ScrollView, TouchableOpacity,  Image, Text, V
 import React, {useLayoutEffect} from 'react'
 import { auth, db } from "../firebase"
 import CustomListItem from '../components/CustomListItem';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+// import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Icons from "react-native-vector-icons/Ionicons"
 
 const HomeScreen = ({navigation}) => {
   console.log(auth.currentUser.photoURL);
@@ -41,7 +42,8 @@ const HomeScreen = ({navigation}) => {
                 }}
             >
                 <TouchableOpacity activeOpacity={0.5}>
-                    <EvilIcons  name="chart" size={30} color="white" />
+                    <Icons name="md-menu" size={26} color="white" />
+                    {/* <EvilIcons  name="chart" size={30} color="white" /> */}
                 </TouchableOpacity>
 
                 {/* <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("AddChat")}> */}
