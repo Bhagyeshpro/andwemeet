@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import "firebase/firestore"
 import "firebase/auth"
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -33,3 +33,15 @@ let app;
   const auth = firebase.auth();
 
   export  { db, auth };
+
+
+
+
+
+
+
+
+
+
+
+  
