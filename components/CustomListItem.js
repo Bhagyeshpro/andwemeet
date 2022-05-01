@@ -2,11 +2,11 @@ import { StyleSheet, TouchableOpacity, Image, Text, View } from 'react-native'
 import React from 'react'
 import { auth, db } from "../firebase"
 
-const CustomListItem = () => {
+const CustomListItem = ({chatName, id}) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity key={id}>
 
-        <View style={{  flexDirection: 'row', height: 60 }}>
+        <View  style={{  flexDirection: 'row', height: 60 }}>
             <View style={styles.leftContainer}>
 
                 <Image
@@ -17,7 +17,7 @@ const CustomListItem = () => {
                 />
             </View>
             <View style={styles.rightContainer}>
-                <Text style={styles.title}>{auth.currentUser.email}</Text>
+                <Text style={styles.title}>{chatName}</Text>
                 <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.subtitle}>subtitle ahi ajelrkerk subtitle ahi ajelrkerk subtitle ahi ajelrkerk subtitle ahi ajelrkerk subtitle ahi ajelrkerk subtitle ahi ajelrkerk subtitle ahi ajelrkerk subtitle ahi ajelrkerk subtitle ahi ajelrkerk </Text>
             </View>
 

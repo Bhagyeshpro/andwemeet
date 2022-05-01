@@ -1,16 +1,27 @@
 import { StyleSheet, SafeAreaView, ScrollView, TouchableOpacity,  Image, Text, View } from 'react-native'
-import React, {useLayoutEffect} from 'react'
+import React, {useLayoutEffect, useEffect, useState} from 'react'
 import { auth, db } from "../firebase"
 import CustomListItem from '../components/CustomListItem';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 const HomeScreen = ({navigation}) => {
-  console.log(auth.currentUser.photoURL);
+    const [chats, setChats] = useState([]);
+//   console.log(auth.currentUser.photoURL);
   const signOutUser = () => {
     auth.signOut().then(() => {
         navigation.replace("Login");
     })
 }
+
+useEffect(() => {
+    const unsubscribe = db.collection("chats").onSnapshot((snapshot) => setChats(
+        snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+        }))
+    ))
+    return unsubscribe;
+}, [])
 
 
   useLayoutEffect(() => {
@@ -34,14 +45,14 @@ const HomeScreen = ({navigation}) => {
         headerRight: () => (
             <View
                 style={{
-                    flexDirection: "row",
+                    // flexDirection: "row",
                     justifyContent: "space-between",
-                    width :20,
-                    marginRight: 10,
+                    width :80,
                 }}
             >
-                <TouchableOpacity activeOpacity={0.5}>
-                    <EvilIcons  name="chart" size={30} color="white" />
+                <TouchableOpacity activeOpacity={0.5} onPress={ () => navigation.navigate("AddChat")}>
+                    <Text style={styles.buttonText}>Add Chat</Text>
+                    {/* <EvilIcons  name="chart" size={30} color="white" /> */}
                 </TouchableOpacity>
 
                 {/* <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("AddChat")}> */}
@@ -54,9 +65,14 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{flex:1}}>
       <ScrollView>
-      <CustomListItem/>
-      <CustomListItem/>
-      <CustomListItem/>
+      {chats.map(({id, data: {chatName}})=> (
+            <CustomListItem 
+                chatName={chatName} 
+                 key={id} 
+                id={id} 
+                // enterChat={enterChat}
+            />
+        ))}
 
       </ScrollView>
     </SafeAreaView>
@@ -65,4 +81,10 @@ const HomeScreen = ({navigation}) => {
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    buttonText: {
+        color: "#fff",
+        fontWeight: "600",
+        fontSize: 15,
+    },
+})
