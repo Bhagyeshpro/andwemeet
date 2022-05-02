@@ -1,4 +1,4 @@
-import { StyleSheet, Button, TextInput, Image, Text, View } from 'react-native'
+import { StyleSheet, Button, TouchableOpacity, TextInput, Image, Text, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { auth } from "../firebase"
 
@@ -84,11 +84,19 @@ const LoginScreen = ({ navigation }) => {
                 />
       <Button
         // onPress={onPressLearnMore}
-        title="Login"
+        title="Register"
         onPress={register}
         color="#841584"
       // accessibilityLabel="Learn more about this purple button"
       />
+      <View style={{flexDirection: "row", alignItems: "center", marginTop: 10}}>
+          <Text style={styles.text}>Have An Account?</Text>
+          <TouchableOpacity activeOpacity={0.5} onPress={ () => navigation.navigate("SignIn")}>
+
+          <Text style={[styles.text, {marginLeft: 5, color: "blue"}]}>Sign In</Text>
+          </TouchableOpacity>
+          
+      </View>
     </View>
   )
 }
@@ -103,5 +111,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     color: "red"
+  },
+  text: {
+    color: "#000",
+    fontSize: 15,
+
   },
 })
