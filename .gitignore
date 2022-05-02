@@ -60,4 +60,4 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-firebase.js
+.firebase.js
